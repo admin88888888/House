@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ddhouse.house.webmagic.mapper.FRulesMapper">
+<mapper namespace="com.ddhouse.house.mapper.FRulesMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.ddhouse.house.webmagic.entity.FRules">
+	<resultMap id="BaseResultMap" type="com.ddhouse.house.entity.FRules">
 		<id column="id" property="id" />
 		<result column="commission" property="commission" />
 		<result column="houseid" property="houseid" />

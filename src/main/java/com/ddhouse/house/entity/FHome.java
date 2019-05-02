@@ -25,7 +25,7 @@ public class FHome extends Model<FHome> {
 
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
-	private Integer hid;
+	private String area;
     /**
      * 租房方式
      */
@@ -34,6 +34,7 @@ public class FHome extends Model<FHome> {
 	private String address;
 	private Integer price;
 	private String hdescribe;
+	private String region;
 
 
 	public Integer getId() {
@@ -44,12 +45,12 @@ public class FHome extends Model<FHome> {
 		this.id = id;
 	}
 
-	public Integer getHid() {
-		return hid;
+	public String getArea() {
+		return area;
 	}
 
-	public void setHid(Integer hid) {
-		this.hid = hid;
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 	public String getHtype() {
@@ -90,6 +91,14 @@ public class FHome extends Model<FHome> {
 
 	public void setHdescribe(String hdescribe) {
 		this.hdescribe = hdescribe;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
 	}
 
 	@Override

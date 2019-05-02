@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qfedu.webmagic.mapper.FHomeMapper">
+<mapper namespace="com.ddhouse.house.mapper.FHomeMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.qfedu.webmagic.entity.FHome">
+	<resultMap id="BaseResultMap" type="com.ddhouse.house.entity.FHome">
 		<id column="id" property="id" />
-		<result column="hid" property="hid" />
+		<result column="area" property="area" />
 		<result column="htype" property="htype" />
 		<result column="hpicture" property="hpicture" />
 		<result column="address" property="address" />
 		<result column="price" property="price" />
 		<result column="hdescribe" property="hdescribe" />
+		<result column="region" property="region" />
 	</resultMap>
+
+	<select id="selectHomeByCondition" parameterType="com.ddhouse.house.entity.FHome" resultType="com.ddhouse.house.entity.FHome">
+		select * from f_home
+		<where>
+			<if test="area != null and area !=''">
+				and area like concat('%', #{area}, '%')
+			</if>
+			<if test="htype != null and htype !=''">
+				and htype = #{htype}
+			</if>
+			<if test="address != null and address !=''">
+				and address = concat('%', #{address}, '%')
+			</if>
+            <if test="price != null and price !=''">
+                and price &lt;= #{price}
+            </if>
+		</where>
+
+	</select>
 
 </mapper>

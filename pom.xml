@@ -55,14 +55,16 @@
     </dependencies>
 
     <build>
-        <resources>
+       <resources>
             <resource>
                 <!-- xml放在java目录下-->
-                <directory>src/main/java</directory>
+               <directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
+                <filtering>false</filtering>
             </resource>
+
         </resources>
 
         <plugins>
