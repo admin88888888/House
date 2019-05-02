@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qfedu.webmagic.mapper.FHouseparticularsMapper">
+<mapper namespace="com.ddhouse.house.mapper.FHouseparticularsMapper">
 
 	<!-- 通用查询映射结果 -->
-	<resultMap id="BaseResultMap" type="com.qfedu.webmagic.entity.FHouseparticulars">
+	<resultMap id="BaseResultMap" type="com.ddhouse.house.entity.FHouseparticulars">
 		<id column="id" property="id" />
 		<result column="houseid" property="houseid" />
 		<result column="address" property="address" />

@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/house?serverTimezone=UTC&characterEncoding=UTF8
+    url: jdbc:mysql://10.8.159.32:3306/house?serverTimezone=UTC&characterEncoding=UTF8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -12,7 +12,7 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
 
 mybatis-plus:
-  mapper-locations: classpath*:/mapper/**/*.xml
+  mapper-locations: classpath*:com/ddhouse/house/mapper/**/*.xml
   type-aliases-package: com.ddhouse.house
 
 
