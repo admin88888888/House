@@ -4,6 +4,8 @@ import com.ddhouse.house.common.JsonBean;
 import com.ddhouse.house.entity.FUser;
 import com.ddhouse.house.service.FUserService;
 import com.ddhouse.house.utils.JsonUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +24,17 @@ import java.util.List;
  * @since 2019-04-27
  */
 @RestController
+@Api(value = "用户相关操作", tags = "操作用户")
 public class FUserController {
 
     @Autowired
     private FUserService fUserService;
 
-    @GetMapping("/user/list.do")
+    /*@GetMapping("/user/list.do")
     public List<FUser> findAllUser(){
 
         return fUserService.list();
-    }
+    }*/
 
     /**
      * 注册账号
@@ -44,6 +47,7 @@ public class FUserController {
      * @return
      */
     @PostMapping("/user/register.do")
+    @ApiOperation(value = "注册新用户", notes = "实现用户新增")
     public JsonBean Register(String phone, String usernumber, String password){
 
         fUserService.Register(phone,usernumber,password);

@@ -33,4 +33,44 @@
 
 	</select>
 
+
+	<resultMap id="VHomeMap" type="com.ddhouse.house.vo.VHomeInfo">
+		<id column="id" property="id" />
+		<result column="area" property="area" />
+		<result column="htype" property="htype" />
+		<result column="hpicture" property="hpicture" />
+		<result column="address" property="address" />
+		<result column="price" property="price" />
+		<result column="hdescribe" property="hdescribe" />
+		<result column="region" property="region" />
+
+		<collection property="meritList"
+					javaType="java.util.ArrayList"
+					ofType="com.ddhouse.house.entity.FHomemerit"
+		>
+			<result column="merit" property="merit" />
+		</collection>
+	</resultMap>
+	<select id="selectHomeByConditions" parameterType="com.ddhouse.house.entity.FHome" resultMap="VHomeMap">
+		select h.*, hm.merit from f_home h
+			inner join f_homeandmerit ham
+			on h.id = ham.hid
+			inner join f_homemerit hm
+			on ham.mid = hm.id
+		<where>
+			<if test="area != null and area !=''">
+				and h.area like concat('%', #{area}, '%')
+			</if>
+			<if test="htype != null and htype !=''">
+				and h.htype = #{htype}
+			</if>
+			<if test="address != null and address !=''">
+				and h.address = concat('%', #{address}, '%')
+			</if>
+			<if test="price != null and price !=''">
+				and h.price &lt;= #{price}
+			</if>
+		</where>
+	</select>
+
 </mapper>

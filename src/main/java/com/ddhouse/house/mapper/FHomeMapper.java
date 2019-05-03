@@ -3,6 +3,7 @@ package com.ddhouse.house.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ddhouse.house.entity.FHome;
+import com.ddhouse.house.vo.VHomeInfo;
 
 import java.util.List;
 
@@ -23,4 +24,12 @@ public interface FHomeMapper extends BaseMapper<FHome> {
      * @return
      */
     List<FHome> selectHomeByCondition(FHome home);
+
+    /**
+     *  通过条件获取房屋信息
+     * @param home
+     *      房屋条件
+     * @return
+     */
+    List<VHomeInfo> selectHomeByConditions(FHome home);
 }
