@@ -13,5 +13,6 @@ import com.ddhouse.house.entity.FCustomer;
  * @since 2019-04-27
  */
 public interface FCustomerService extends IService<FCustomer> {
-	
+    //添加客户信息
+	public void add(FCustomer fCustomer);
 }
