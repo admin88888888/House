@@ -5,7 +5,6 @@
 	<!-- 通用查询映射结果 -->
 	<resultMap id="BaseResultMap" type="com.ddhouse.house.entity.FHomemerit">
 		<id column="id" property="id" />
-		<result column="hid" property="hid" />
 		<result column="merit" property="merit" />
 	</resultMap>
 

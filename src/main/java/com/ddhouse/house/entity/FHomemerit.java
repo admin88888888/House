@@ -23,7 +23,7 @@ public class FHomemerit extends Model<FHomemerit> {
 
 	@TableId(value="id", type= IdType.AUTO)
 	private Integer id;
-	private Integer hid;
+
 	private String merit;
 
 
@@ -35,13 +35,6 @@ public class FHomemerit extends Model<FHomemerit> {
 		this.id = id;
 	}
 
-	public Integer getHid() {
-		return hid;
-	}
-
-	public void setHid(Integer hid) {
-		this.hid = hid;
-	}
 
 	public String getMerit() {
 		return merit;
