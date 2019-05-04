@@ -69,5 +69,12 @@ public class FHomeController {
         List<VHomeInfo> list = homeMapper.selectHomeRecommend();
         return JsonUtils.createJsonBean(1000,null,list);
     }
+    @GetMapping("/home/selectHomeById.do")
+    @ApiOperation(value = "获取房屋信息", notes = "获取房屋信息")
+    public JsonBean selectHomeById(@RequestParam(value = "id", required = false)int id){
+
+        FHome home = homeMapper.selectById(id);
+        return JsonUtils.createJsonBean(1000,null,home);
+    }
 
 }
