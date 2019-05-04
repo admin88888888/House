@@ -39,7 +39,7 @@ public class FHomeController {
     }*/
 
     @PostMapping("/home/homeList.do")
-    @ApiOperation(value = "整租，合租，业主直租房屋展示", notes = "实现房屋展示")
+    @ApiOperation(value = "整租，合租，业主直租房,公寓，豪宅等房屋列表展示，通过条件显示", notes = "实现房屋展示")
     public JsonBean selectHemoAll(@RequestBody(required = false) FHome fHome){
 
         List<VHomeInfo> list = homeMapper.selectHomeByConditions(fHome);
@@ -53,4 +53,21 @@ public class FHomeController {
         VHomeInfo info = fHomeService.selectHomeDetails(id);
         return JsonUtils.createJsonBean(1000,null,info);
     }
+
+    @GetMapping("/home/selectHomeGoods.do")
+    @ApiOperation(value = "公寓精选", notes = "公寓精选")
+    public JsonBean selectHomeGoods(){
+
+        List<FHome> list = homeMapper.selectHomeGoods();
+        return JsonUtils.createJsonBean(1000,null,list);
+    }
+
+    @GetMapping("/home/selectHomeRecommend.do")
+    @ApiOperation(value = "公寓推荐房型", notes = "公寓推荐房型")
+    public JsonBean selectHomeRecommend(){
+
+        List<VHomeInfo> list = homeMapper.selectHomeRecommend();
+        return JsonUtils.createJsonBean(1000,null,list);
+    }
+
 }

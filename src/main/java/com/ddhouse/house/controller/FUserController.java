@@ -75,13 +75,13 @@ public class FUserController {
     //发送验证码  一份钟发送1次  验证码3分钟失效
     @ApiOperation(value = "发送短信验证码",notes = "发送短信验证码")
     @PostMapping("/user/sendmsg.do")
-    public JsonBean sendMsg(String phone){
+    public JsonBean sendMsg(@RequestParam(value = "phone",required=false)String phone){
         return codeService.sendMsg(phone);
     }
     //
     @ApiOperation(value = "校验短信验证码,并修改密码",notes = "校验短信验证码,并修改密码")
     @PostMapping("/user/updatePassWord.do")
-    public JsonBean updatePassWord(String phone,String code,String password){
+    public JsonBean updatePassWord(@RequestParam(value = "phone",required=false)String phone,@RequestParam(value = "code",required=false)String code,@RequestParam(value = "password",required=false)String password){
 
         int id = Integer.parseInt(jedisUtil.getStr("fUserId"));
         fUserService.updatePassword(phone,code,password,id);
@@ -91,7 +91,7 @@ public class FUserController {
 
     @ApiOperation(value = "获取登录用户的信息",notes = "获取登录用户的信息")
     @GetMapping("/user/selectLoginUser.do")
-    public JsonBean selectLoginUser(int id){
+    public JsonBean selectLoginUser(@RequestParam(value = "id",required=false)int id){
 
         if(!jedisUtil.isExists("fUserId"+id)){
             String msg = "用户未登录，请重新登录";
@@ -104,7 +104,7 @@ public class FUserController {
 
     @ApiOperation(value = "用户退出登录",notes = "用户退出登录")
     @GetMapping("/user/loginOut.do")
-    public  JsonBean loginOut(int id){
+    public  JsonBean loginOut(@RequestParam(value = "id",required=false)int id){
 
         jedisUtil.delKey("fUserId"+id);
         return JsonUtils.createJsonBean(1000,"退出成功",null);
