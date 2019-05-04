@@ -1,11 +1,16 @@
 package com.ddhouse.house.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ddhouse.house.entity.FHouseparticulars;
 import com.ddhouse.house.entity.FRules;
 import com.ddhouse.house.mapper.FRulesMapper;
 import com.ddhouse.house.service.FRulesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,5 +22,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FRulesServiceImpl extends ServiceImpl<FRulesMapper, FRules> implements FRulesService {
-	
+    @Autowired
+    public FRulesMapper fRulesMapper;
+    @Override
+    public List<FRules> findAll() {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        List<FRules> list = fRulesMapper.selectList(queryWrapper);
+        return list;
+    }
 }
