@@ -7,9 +7,12 @@ import com.ddhouse.house.entity.FUser;
 import com.ddhouse.house.mapper.FUserMapper;
 import com.ddhouse.house.service.CodeService;
 import com.ddhouse.house.service.FUserService;
+import com.ddhouse.house.utils.JedisUtil;
 import com.ddhouse.house.utils.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -27,6 +30,11 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
 
     @Autowired
     private CodeService codeService;
+
+    @Autowired
+    private JedisUtil jedisUtil;
+
+    public  String userId;
     @Override
     public void Register(String phone, String usernumber, String password) {
 
@@ -64,7 +72,7 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
     }
 
     @Override
-    public void Login(String usernumber, String password) {
+    public int Login(String usernumber, String password) {
         QueryWrapper<FUser> queryWrapper=new QueryWrapper<>();
         queryWrapper.like("usernumber", usernumber);
         FUser fUser = userMapper.selectOne(queryWrapper);
@@ -86,21 +94,40 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
                     if(!fUser3.getPassword().equals(password)){
                         throw new RuntimeException("密码错误");
                     }
+                    if(jedisUtil.isExists("fUserId"+fUser3.getId())){
+                        jedisUtil.delKey("fUserId"+fUser3.getId());
+                        throw new RuntimeException("用户已在别处登录，若非本人操作，请及时修改密码，重新登录！");
+                    }
+                    jedisUtil.setStr("fUserId"+fUser3.getId(),fUser3.getId()+"",3600*24*7);
+                    return fUser3.getId();
                 }
             } else{
                 if(!fUser2.getPassword().equals(password)){
                     throw new RuntimeException("密码错误");
                 }
+                if(jedisUtil.isExists("fUserId"+fUser2.getId())){
+                    jedisUtil.delKey("fUserId"+fUser2.getId());
+                    throw new RuntimeException("用户已在别处登录，若非本人操作，请及时修改密码，重新登录！");
+                }
+                jedisUtil.setStr("fUserId"+fUser2.getId(),fUser2.getId()+"",3600*24*7);
+                return fUser2.getId();
             }
 
         }else {
             if(!fUser.getPassword().equals(password)){
                 throw new RuntimeException("密码错误");
             }
+            if(jedisUtil.isExists("fUserId"+fUser.getId())){
+                jedisUtil.delKey("fUserId"+fUser.getId());
+                throw new RuntimeException("用户已在别处登录，若非本人操作，请及时修改密码，重新登录！");
+            }
+            jedisUtil.setStr("fUserId"+fUser.getId(),fUser.getId()+"",3600*24*7);
+            return fUser.getId();
         }
 
 
     }
+
 
     @Override
     public void updatePassword(String phone,String code ,String password,int id) {
