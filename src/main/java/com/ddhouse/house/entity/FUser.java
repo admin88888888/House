@@ -44,6 +44,7 @@ public class FUser extends Model<FUser> {
      * 银行卡号
      */
 	private String bankcard;
+	private String email;
 
 
 	public Integer getId() {
@@ -116,6 +117,14 @@ public class FUser extends Model<FUser> {
 
 	public void setBankcard(String bankcard) {
 		this.bankcard = bankcard;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override

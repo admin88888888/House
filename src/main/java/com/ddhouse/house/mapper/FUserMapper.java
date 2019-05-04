@@ -14,4 +14,5 @@ import com.ddhouse.house.entity.FUser;
  */
 public interface FUserMapper extends BaseMapper<FUser> {
 
+
 }

@@ -8,9 +8,10 @@
 		<result column="hid" property="hid" />
 		<result column="lid" property="lid" />
 		<result column="htype" property="htype" />
-		<result column="hpicture" property="hpicture" />
-		<result column="address" property="address" />
-		<result column="price" property="price" />
+		<result column="image1" property="image1" />
+		<result column="image2" property="image2" />
+		<result column="image3" property="image3" />
+		<result column="image4" property="image4" />
 	</resultMap>
 
 </mapper>

@@ -11,4 +11,14 @@ public class JsonUtils {
 		jsonBean.setData(data);
 		return jsonBean;
 	}
+
+	public static JsonBean setOK(){
+		return createJsonBean(1000,"OK",null);
+	}
+	public static JsonBean setERROR(){
+		return createJsonBean(0,"ERROR",null);
+	}
+	public static JsonBean setOK(String msg){
+		return createJsonBean(1000,msg,null);
+	}
 }
