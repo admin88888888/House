@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ddhouse.house.entity.FServe;
 import com.ddhouse.house.mapper.FServeMapper;
 import com.ddhouse.house.service.FServeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,5 +18,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FServeServiceImpl extends ServiceImpl<FServeMapper, FServe> implements FServeService {
-	
+
+    @Autowired
+    private FServeMapper fServeMapper;
+
+    @Override
+    public void addAll(FServe fServe) {
+        fServeMapper.add(fServe);
+    }
 }

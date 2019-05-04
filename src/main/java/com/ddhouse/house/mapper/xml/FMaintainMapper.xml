@@ -10,4 +10,36 @@
 		<result column="evaluate" property="evaluate" />
 	</resultMap>
 
+	<insert id="add" parameterType="com.ddhouse.house.entity.FMaintain">
+		insert into f_maintain
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="maintain != null">
+				maintain,
+			</if>
+			<if test="worker != null">
+				worker,
+			</if>
+			<if test="evaluate != null">
+				evaluate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="maintain != null">
+				#{maintain,jdbcType=VARCHAR},
+			</if>
+			<if test="worker != null">
+				#{worker,jdbcType=VARCHAR},
+			</if>
+			<if test="evaluate != null">
+				#{evaluate,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
 </mapper>

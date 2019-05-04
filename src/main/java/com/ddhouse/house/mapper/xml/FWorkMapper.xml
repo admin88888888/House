@@ -11,4 +11,42 @@
 		<result column="image" property="image" />
 	</resultMap>
 
+	<insert id="add" parameterType="com.ddhouse.house.entity.FWork">
+		insert into f_work
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="info != null">
+				info,
+			</if>
+			<if test="level != null">
+				level,
+			</if>
+			<if test="image != null">
+				image,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="info != null">
+				#{info,jdbcType=VARCHAR},
+			</if>
+			<if test="level != null">
+				#{level,jdbcType=VARCHAR},
+			</if>
+			<if test="image != null">
+				#{image,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
 </mapper>

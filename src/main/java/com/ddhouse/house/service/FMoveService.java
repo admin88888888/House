@@ -13,5 +13,7 @@ import com.ddhouse.house.entity.FMove;
  * @since 2019-04-27
  */
 public interface FMoveService extends IService<FMove> {
-	
+
+    public void addMove(FMove fMove);
+
 }

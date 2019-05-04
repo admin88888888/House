@@ -13,5 +13,7 @@ import com.ddhouse.house.entity.FWork;
  * @since 2019-04-27
  */
 public interface FWorkService extends IService<FWork> {
+
+    public void addWork(FWork fWork);
 	
 }

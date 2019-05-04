@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ddhouse.house.entity.FWork;
 import com.ddhouse.house.mapper.FWorkMapper;
 import com.ddhouse.house.service.FWorkService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +17,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FWorkServiceImpl extends ServiceImpl<FWorkMapper, FWork> implements FWorkService {
-	
+
+    @Autowired
+    private FWorkMapper fWorkMapper;
+
+    @Override
+    public void addWork(FWork fWork) {
+        fWorkMapper.add(fWork);
+    }
 }

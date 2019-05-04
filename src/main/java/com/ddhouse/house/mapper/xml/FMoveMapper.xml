@@ -11,4 +11,42 @@
 		<result column="maprice" property="maprice" />
 	</resultMap>
 
+	<insert id="add" parameterType="com.ddhouse.house.entity.FMove">
+		insert into f_move
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="mname != null">
+				mname,
+			</if>
+			<if test="origin != null">
+				origin,
+			</if>
+			<if test="terminus != null">
+				terminus,
+			</if>
+			<if test="maprice != null">
+				maprice,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="mname != null">
+				#{mname,jdbcType=VARCHAR},
+			</if>
+			<if test="origin != null">
+				#{origin,jdbcType=VARCHAR},
+			</if>
+			<if test="terminus != null">
+				#{terminus,jdbcType=VARCHAR},
+			</if>
+			<if test="maprice != null">
+				#{maprice,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
 </mapper>

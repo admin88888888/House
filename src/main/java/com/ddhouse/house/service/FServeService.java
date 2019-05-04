@@ -13,5 +13,7 @@ import com.ddhouse.house.entity.FServe;
  * @since 2019-04-27
  */
 public interface FServeService extends IService<FServe> {
+
+    public void addAll(FServe fServe);
 	
 }

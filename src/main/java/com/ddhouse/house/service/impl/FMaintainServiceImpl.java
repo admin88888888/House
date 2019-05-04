@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ddhouse.house.entity.FMaintain;
 import com.ddhouse.house.mapper.FMaintainMapper;
 import com.ddhouse.house.service.FMaintainService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,5 +18,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class FMaintainServiceImpl extends ServiceImpl<FMaintainMapper, FMaintain> implements FMaintainService {
-	
+
+    @Autowired
+    private FMaintainMapper fMaintainMapper;
+
+    @Override
+    public void addMaintain(FMaintain fMaintain) {
+        fMaintainMapper.add(fMaintain);
+    }
 }

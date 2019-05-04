@@ -11,4 +11,42 @@
 		<result column="stime" property="stime" />
 	</resultMap>
 
+	<insert id="add" parameterType="com.ddhouse.house.entity.FServe">
+		insert into f_serve
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="hid != null">
+				hid,
+			</if>
+			<if test="stype != null">
+				stype,
+			</if>
+			<if test="spice != null">
+				spice,
+			</if>
+			<if test="stime != null">
+				stime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="hid != null">
+				#{hid,jdbcType=INTEGER},
+			</if>
+			<if test="stype != null">
+				#{stype,jdbcType=VARCHAR},
+			</if>
+			<if test="spice != null">
+				#{spice,jdbcType=INTEGER},
+			</if>
+			<if test="stime != null">
+				#{stime,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+
 </mapper>
