@@ -71,6 +71,9 @@
 			<if test="price != null and price !=''">
 				and h.price &lt;= #{price}
 			</if>
+			<if test="region != null and price !=''">
+				and h.region = #{region}
+			</if>
 		</where>
 	</select>
 
@@ -89,5 +92,36 @@
 			where h.id = #{id}
 	</select>
 
-	<!---->
+	<!--公寓精选-->
+	<select id="selectHomeGoods" resultType="com.ddhouse.house.entity.FHome">
+		select * from f_home where htype="公寓" order by price desc limit 2
+	</select>
+
+
+	<resultMap id="VHomeMap2" type="com.ddhouse.house.vo.VHomeInfo">
+		<id column="id" property="id" />
+		<result column="area" property="area" />
+		<result column="htype" property="htype" />
+		<result column="hpicture" property="hpicture" />
+		<result column="address" property="address" />
+		<result column="price" property="price" />
+		<result column="hdescribe" property="hdescribe" />
+		<result column="region" property="region" />
+
+		<association property="homedetails"
+					javaType="com.ddhouse.house.entity.FHomedetails"
+		>
+			<result column="image1" property="image1" />
+			<result column="image2" property="image2" />
+			<result column="image3" property="image3" />
+			<result column="image4" property="image4" />
+		</association>
+	</resultMap>
+	<!--推荐房型-->
+	<select id="selectHomeRecommend" resultMap="VHomeMap2">
+		select h.*, hd.image1,hd.image2,hd.image3,hd.image4 from f_home h
+		inner join f_homedetails hd
+		on h.id = hd.hid
+		where h.htype="公寓"  and h.price &gt; 4200 ORDER BY h.price limit 2
+	</select>
 </mapper>

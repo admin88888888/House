@@ -48,4 +48,14 @@ public interface FHomeMapper extends BaseMapper<FHome> {
      */
     VHomeInfo selectHomeDe(int id);
 
+    /**
+     * 公寓精选
+     * @return
+     */
+    List<FHome> selectHomeGoods();
+
+    /**
+     * 推荐房型
+     */
+    List<VHomeInfo> selectHomeRecommend();
 }
