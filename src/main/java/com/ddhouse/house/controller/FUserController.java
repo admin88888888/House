@@ -5,6 +5,7 @@ import com.ddhouse.house.entity.FUser;
 import com.ddhouse.house.mapper.FUserMapper;
 import com.ddhouse.house.service.CodeService;
 import com.ddhouse.house.service.FUserService;
+import com.ddhouse.house.utils.JedisUtil;
 import com.ddhouse.house.utils.JsonUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +36,9 @@ public class FUserController {
     @Autowired
     private CodeService codeService;
 
+    @Autowired
+    private JedisUtil jedisUtil;
+
     /*@GetMapping("/user/list.do")
     public List<FUser> findAllUser(){
 
@@ -60,11 +64,11 @@ public class FUserController {
     }
 
     @PostMapping("/user/login.do")
-    @ApiOperation(value = "用户登录", notes = "判断用户登录")
+    @ApiOperation(value = "用户登录,【返回值id为用户id 要传递给获取用户和退出操作】", notes = "判断用户登录")
     public JsonBean Login(@RequestParam(value = "usernumber",required=false)String usernumber, @RequestParam(value = "password",required=false)String password){
 
-        fUserService.Login(usernumber, password);
-        return JsonUtils.createJsonBean(1000,"登录成功",null);
+        int id = fUserService.Login(usernumber, password);
+        return JsonUtils.createJsonBean(1000,"登录成功",id);
     }
 
 
@@ -76,18 +80,33 @@ public class FUserController {
     }
     //
     @ApiOperation(value = "校验短信验证码,并修改密码",notes = "校验短信验证码,并修改密码")
-    @GetMapping("/user/updatePassWord.do")
-    public JsonBean updatePassWord(String phone,String code,String password, int id){
+    @PostMapping("/user/updatePassWord.do")
+    public JsonBean updatePassWord(String phone,String code,String password){
 
+        int id = Integer.parseInt(jedisUtil.getStr("fUserId"));
         fUserService.updatePassword(phone,code,password,id);
         return JsonUtils.setOK("修改成功");
     }
 
-    @ApiOperation(value = "获取用户信息",notes = "获取用户信息")
-    @GetMapping("/user/selectUserById.do")
-    public JsonBean selectUserById(int id){
 
+    @ApiOperation(value = "获取登录用户的信息",notes = "获取登录用户的信息")
+    @GetMapping("/user/selectLoginUser.do")
+    public JsonBean selectLoginUser(int id){
+
+        if(!jedisUtil.isExists("fUserId"+id)){
+            String msg = "用户未登录，请重新登录";
+            return JsonUtils.createJsonBean(1000,msg,null);
+        }
         FUser fUser = fUserMapper.selectById(id);
+
         return JsonUtils.createJsonBean(1000,null,fUser);
+    }
+
+    @ApiOperation(value = "用户退出登录",notes = "用户退出登录")
+    @GetMapping("/user/loginOut.do")
+    public  JsonBean loginOut(int id){
+
+        jedisUtil.delKey("fUserId"+id);
+        return JsonUtils.createJsonBean(1000,"退出成功",null);
     }
 }
