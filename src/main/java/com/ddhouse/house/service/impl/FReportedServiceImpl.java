@@ -3,13 +3,13 @@ package com.ddhouse.house.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.ddhouse.house.common.JsonBean;
-import com.ddhouse.house.entity.FCustomer;
 import com.ddhouse.house.entity.FReported;
 import com.ddhouse.house.mapper.FReportedMapper;
 import com.ddhouse.house.service.FReportedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -39,5 +39,12 @@ public class FReportedServiceImpl extends ServiceImpl<FReportedMapper, FReported
             throw new RuntimeException("该手机号已经注册过哟！");
         }
         fReportedMapper.insert(fReported);
+    }
+
+    @Override
+    public List<FReported> findAll() {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        List<FReported> list = fReportedMapper.selectList(queryWrapper);
+        return list;
     }
 }

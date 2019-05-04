@@ -7,10 +7,10 @@ import com.ddhouse.house.utils.JsonUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -30,5 +30,11 @@ public class FReportedController {
     public JsonBean add(FReported fReported){
 	    fReportedService.add(fReported);
         return JsonUtils.createJsonBean(1000,"报备成功",null);
+    }
+    @PostMapping("/reported/show.do")
+    @ApiOperation(value = "报备信息展示", notes = "实现报备信息展示")
+    public JsonBean findAll(){
+        List<FReported> list = fReportedService.findAll();
+        return JsonUtils.createJsonBean(1000,"总条数:"+String.valueOf(list.size())+"条",list);
     }
 }

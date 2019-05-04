@@ -16,4 +16,6 @@ import java.util.List;
 public interface FReportedService extends IService<FReported> {
 	//报备信息添加
     public void add(FReported fReported);
+    //报备信息展示
+    public List<FReported> findAll();
 }
