@@ -1,5 +1,6 @@
 package com.ddhouse.house.vo;
 
+import com.ddhouse.house.entity.FHomedetails;
 import com.ddhouse.house.entity.FHomemerit;
 import lombok.Data;
 
@@ -21,4 +22,5 @@ public class VHomeInfo {
     private String region;
 
     private List<FHomemerit> meritList;
+    private FHomedetails homedetails;
 }

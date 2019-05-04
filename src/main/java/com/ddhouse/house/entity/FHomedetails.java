@@ -26,9 +26,11 @@ public class FHomedetails extends Model<FHomedetails> {
 	private Integer hid;
 	private Integer lid;
 	private String htype;
-	private String hpicture;
-	private String address;
-	private Integer price;
+	private String image1;
+	private String image2;
+	private String image3;
+	private String image4;
+
 
 
 	public Integer getId() {
@@ -63,28 +65,36 @@ public class FHomedetails extends Model<FHomedetails> {
 		this.htype = htype;
 	}
 
-	public String getHpicture() {
-		return hpicture;
+	public String getImage1() {
+		return image1;
 	}
 
-	public void setHpicture(String hpicture) {
-		this.hpicture = hpicture;
+	public void setImage1(String image1) {
+		this.image1 = image1;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getImage2() {
+		return image2;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setImage2(String image2) {
+		this.image2 = image2;
 	}
 
-	public Integer getPrice() {
-		return price;
+	public String getImage3() {
+		return image3;
 	}
 
-	public void setPrice(Integer price) {
-		this.price = price;
+	public void setImage3(String image3) {
+		this.image3 = image3;
+	}
+
+	public String getImage4() {
+		return image4;
+	}
+
+	public void setImage4(String image4) {
+		this.image4 = image4;
 	}
 
 	@Override

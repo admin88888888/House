@@ -24,4 +24,8 @@ public interface FUserService extends IService<FUser> {
      *      密码
      */
     void Register(String phone, String usernumber, String password);
+
+    void Login(String usernumber, String password);
+
+    void updatePassword(String phone,String code ,String password,int id);
 }

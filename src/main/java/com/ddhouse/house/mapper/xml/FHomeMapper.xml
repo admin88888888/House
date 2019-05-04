@@ -51,6 +51,7 @@
 			<result column="merit" property="merit" />
 		</collection>
 	</resultMap>
+	<!--通过条件获取房屋信息-->
 	<select id="selectHomeByConditions" parameterType="com.ddhouse.house.entity.FHome" resultMap="VHomeMap">
 		select h.*, hm.merit from f_home h
 			inner join f_homeandmerit ham
@@ -73,4 +74,20 @@
 		</where>
 	</select>
 
+	<!--通过房屋id获取房屋详细信息-->
+	<select id="selectHomeDetails" parameterType="int" resultType="com.ddhouse.house.entity.FHomedetails">
+		select image1,image2,image3,image4 from f_homedetails where hid = #{hid}
+	</select>
+
+	<!--通过房屋id获取房屋信息-->
+	<select id="selectHomeDe" parameterType="int" resultMap="VHomeMap">
+		select h.*, hm.merit from f_home h
+			inner join f_homeandmerit ham
+			on h.id = ham.hid
+			inner join f_homemerit hm
+			on ham.mid = hm.id
+			where h.id = #{id}
+	</select>
+
+	<!---->
 </mapper>
