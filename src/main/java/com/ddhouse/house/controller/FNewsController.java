@@ -31,7 +31,7 @@ public class FNewsController {
 	@Autowired
     public FNewsService fNewsService;
 
-	@GetMapping("/fnews/show.do")
+	@GetMapping("/news/show.do")
     @ApiOperation(value = "新闻展示",notes = "实现房产新闻的展示")
     public JsonBean findAll(){
         List<FNews> list = fNewsService.findAll();

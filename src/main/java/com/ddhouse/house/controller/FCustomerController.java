@@ -27,7 +27,7 @@ public class FCustomerController {
 
     @Autowired
     private FCustomerService fCustomerService;
-    @PostMapping("customer/add.do")
+    @PostMapping("/customer/add.do")
     @ApiOperation(value = "客户信息添加", notes = "实现客户信息添加")
     public JsonBean add(FCustomer fCustomer){
         fCustomerService.add(fCustomer);
