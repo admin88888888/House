@@ -27,7 +27,6 @@ public class FNews extends Model<FNews> {
 	private Integer id;
 	private String title;
 	private String sketch;
-	private String content;
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
 	private Date time;
 	private String publisher;
@@ -56,14 +55,6 @@ public class FNews extends Model<FNews> {
 
 	public void setSketch(String sketch) {
 		this.sketch = sketch;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
 	}
 
 	public Date getTime() {

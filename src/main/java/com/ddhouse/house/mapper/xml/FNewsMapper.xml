@@ -7,7 +7,6 @@
 		<id column="id" property="id" />
 		<result column="title" property="title" />
 		<result column="sketch" property="sketch" />
-		<result column="content" property="content" />
 		<result column="time" property="time" />
 		<result column="publisher" property="publisher" />
 		<result column="image" property="image" />
