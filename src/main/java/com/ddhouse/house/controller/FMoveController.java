@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -27,7 +28,7 @@ public class FMoveController {
 
     @PostMapping("/move/add.do")
     @ApiOperation(value = "添加搬家信息", notes = "添加搬家信息")
-    public JsonBean addByMove(FMove fMove){
+    public JsonBean addByMove(@RequestBody(required = false) FMove fMove){
         fMoveService.addMove(fMove);
         return JsonUtils.createJsonBean(1000, "新增成功", null);
     }
