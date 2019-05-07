@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -27,7 +28,7 @@ public class FServeController {
 
     @PostMapping("/serve/add.do")
     @ApiOperation(value = "添加服务", notes = "添加服务")
-    public JsonBean addByAll(FServe fServe){
+    public JsonBean addByAll(@RequestBody(required = false)FServe fServe){
         fServeService.addAll(fServe);
         return JsonUtils.createJsonBean(1000, "新增成功", null);
     }

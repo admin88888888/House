@@ -8,10 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -30,7 +27,7 @@ public class FMaintainController {
 
     @PostMapping("/maintain/add.do")
     @ApiOperation(value = "添加维修信息", notes = "添加维修信息")
-    public JsonBean addByMaintain(FMaintain fMaintain){
+    public JsonBean addByMaintain(@RequestBody(required = false)FMaintain fMaintain){
         fMaintainService.addMaintain(fMaintain);
         return JsonUtils.createJsonBean(1000, "新增成功", null);
     }

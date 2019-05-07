@@ -1,0 +1,29 @@
+package com.ddhouse.house.config;
+
+
+import com.ddhouse.house.filter.CrosFilter;
+import com.fasterxml.jackson.core.filter.TokenFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.ArrayList;
+
+/**
+ *@Author feri
+ *@Date Created in 2019/4/29 17:54
+ */
+@Configuration
+public class FilterConfig {
+    @Bean
+    public FilterRegistrationBean createFRB(){
+        FilterRegistrationBean filterRegistrationBean=new FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new CrosFilter());
+        ArrayList<String> list=new ArrayList<>();
+        list.add("/*");
+        filterRegistrationBean.setUrlPatterns(list);
+        return filterRegistrationBean;
+    }
+
+
+}
