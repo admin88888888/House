@@ -49,4 +49,12 @@
 		</trim>
 	</insert>
 
+	<select id="findAll" resultType="com.ddhouse.house.entity.FWork">
+		select * from f_work where level like "%金牌维修员%" limit 1
+	</select>
+
+	<select id="findClean" resultType="com.ddhouse.house.entity.FWork">
+		select name, info from f_work where level like "%金牌保洁员%" limit 1
+	</select>
+
 </mapper>

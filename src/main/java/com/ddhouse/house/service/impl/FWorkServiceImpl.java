@@ -7,6 +7,8 @@ import com.ddhouse.house.service.FWorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -24,5 +26,17 @@ public class FWorkServiceImpl extends ServiceImpl<FWorkMapper, FWork> implements
     @Override
     public void addWork(FWork fWork) {
         fWorkMapper.add(fWork);
+    }
+
+    @Override
+    public List<FWork> findWorkAll() {
+        List<FWork> list = fWorkMapper.findAll();
+        return list;
+    }
+
+    @Override
+    public List<FWork> findCleanWork() {
+        List<FWork> list = fWorkMapper.findClean();
+        return list;
     }
 }

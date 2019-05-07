@@ -4,6 +4,8 @@ package com.ddhouse.house.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ddhouse.house.entity.FWork;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -15,5 +17,9 @@ import com.ddhouse.house.entity.FWork;
 public interface FWorkService extends IService<FWork> {
 
     public void addWork(FWork fWork);
+
+    public List<FWork> findWorkAll();
+
+    public List<FWork> findCleanWork();
 	
 }

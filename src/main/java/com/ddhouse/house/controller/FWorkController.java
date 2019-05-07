@@ -8,10 +8,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -33,6 +32,20 @@ public class FWorkController {
     public JsonBean addByWork(@RequestBody(required = false)FWork fWork){
         fWorkService.addWork(fWork);
         return JsonUtils.createJsonBean(1000, "新增成功", null);
+    }
+
+    @GetMapping("/work/list.do")
+    @ApiOperation(value = "展示维修员信息", notes = "展示维修员信息")
+    public JsonBean findByWorkAll(){
+        List<FWork> list = fWorkService.findWorkAll();
+        return JsonUtils.createJsonBean(1000,null,list);
+    }
+
+    @GetMapping("/work/listclean.do")
+    @ApiOperation(value = "展示保洁员信息", notes = "展示保洁员信息")
+    public JsonBean findCleanWorkAll(){
+        List<FWork> list = fWorkService.findCleanWork();
+        return JsonUtils.createJsonBean(1000,null,list);
     }
 
 }
