@@ -43,14 +43,14 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
         }
 
         QueryWrapper<FUser> queryWrapper=new QueryWrapper<>();
-        queryWrapper.like("phone",phone);
+        queryWrapper.eq("phone",phone);
         FUser user = userMapper.selectOne(queryWrapper);
         if(user != null){
             throw new RuntimeException("该手机号已注册");
         }
 
         QueryWrapper<FUser> queryWrapper2=new QueryWrapper<>();
-        queryWrapper2.like("usernumber", usernumber);
+        queryWrapper2.eq("usernumber", usernumber);
         FUser user2 = userMapper.selectOne(queryWrapper2);
         if (user2 != null){
             throw new RuntimeException("该用户名已存在");
@@ -62,7 +62,7 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
         fUser.setPhone(phone);
         fUser.setName("柚家客"+ RandomString.getRandomString(9));
         QueryWrapper<FUser> queryWrapper3=new QueryWrapper<>();
-        queryWrapper3.like("name", fUser.getName());
+        queryWrapper3.eq("name", fUser.getName());
         FUser user3 = userMapper.selectOne(queryWrapper2);
         if(user3 != null){
             fUser.setName("柚家客"+ RandomString.getRandomString(9));
@@ -74,17 +74,17 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
     @Override
     public int Login(String usernumber, String password) {
         QueryWrapper<FUser> queryWrapper=new QueryWrapper<>();
-        queryWrapper.like("usernumber", usernumber);
+        queryWrapper.eq("usernumber", usernumber);
         FUser fUser = userMapper.selectOne(queryWrapper);
 
         if(fUser == null){
             QueryWrapper<FUser> queryWrapper2=new QueryWrapper<>();
-            queryWrapper2.like("phone", usernumber);
+            queryWrapper2.eq("phone", usernumber);
             FUser fUser2 = userMapper.selectOne(queryWrapper2);
 
             if(fUser2 == null){
                 QueryWrapper<FUser> queryWrapper3=new QueryWrapper<>();
-                queryWrapper3.like("email", usernumber);
+                queryWrapper3.eq("email", usernumber);
                 FUser fUser3 = userMapper.selectOne(queryWrapper3);
 
                 if(fUser3 == null){
@@ -137,16 +137,16 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
             throw new RuntimeException("验证码不正确");
         }
         QueryWrapper<FUser> queryWrapper1 = new QueryWrapper();
-        queryWrapper1.like("id", id);
+        queryWrapper1.eq("id", id);
         FUser fUser1 = userMapper.selectOne(queryWrapper1);
         if (!phone.equals(fUser1.getPhone())) {
             throw new RuntimeException("手机号不正确");
         }
         QueryWrapper<FUser> queryWrapper = new QueryWrapper();
-        queryWrapper.like("password", password);
+        queryWrapper.eq("password", password);
 
         QueryWrapper<FUser> queryWrapper2 = new QueryWrapper();
-        queryWrapper.like("id", password);
+        queryWrapper.eq("id", password);
         FUser fUser = userMapper.selectOne(queryWrapper2);
         userMapper.update(fUser,queryWrapper);
     }
