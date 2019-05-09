@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -65,9 +67,9 @@ public class FUserController {
 
     @PostMapping("/user/login.do")
     @ApiOperation(value = "用户登录,【返回值id为用户id 要传递给获取用户和退出操作】", notes = "判断用户登录")
-    public JsonBean Login(@RequestParam(value = "usernumber",required=false)String usernumber, @RequestParam(value = "password",required=false)String password){
+    public JsonBean Login(@RequestParam(value = "usernumber",required=false)String usernumber, @RequestParam(value = "password",required=false)String password,HttpServletRequest request){
 
-        int id = fUserService.Login(usernumber, password);
+        int id = fUserService.Login(usernumber, password, request);
         return JsonUtils.createJsonBean(1000,"登录成功",id);
     }
 
@@ -91,22 +93,33 @@ public class FUserController {
 
     @ApiOperation(value = "获取登录用户的信息",notes = "获取登录用户的信息")
     @GetMapping("/user/selectLoginUser.do")
-    public JsonBean selectLoginUser(@RequestParam(value = "id",required=false)int id){
+    public JsonBean selectLoginUser(HttpServletRequest request){
 
-        if(!jedisUtil.isExists("fUserId"+id)){
-            String msg = "用户未登录，请重新登录";
-            return JsonUtils.createJsonBean(1000,msg,null);
+        HttpSession session = request.getSession();
+        FUser fUser = (FUser) session.getAttribute("fUser");
+        if(fUser != null){
+
+            if(!jedisUtil.isExists("fUserId"+fUser.getId())){
+                String msg = "用户未登录，请重新登录";
+                return JsonUtils.createJsonBean(1000,msg,null);
+            }
         }
-        FUser fUser = fUserMapper.selectById(id);
+
 
         return JsonUtils.createJsonBean(1000,null,fUser);
     }
 
     @ApiOperation(value = "用户退出登录",notes = "用户退出登录")
     @GetMapping("/user/loginOut.do")
-    public  JsonBean loginOut(@RequestParam(value = "id",required=false)int id){
+    public  JsonBean loginOut(HttpServletRequest request){
 
-        jedisUtil.delKey("fUserId"+id);
+        HttpSession session = request.getSession();
+        FUser fUser = (FUser) session.getAttribute("fUser");
+        if(fUser != null){
+
+            jedisUtil.delKey("fUserId"+fUser.getId());
+            session.removeAttribute("fUser");
+        }
         return JsonUtils.createJsonBean(1000,"退出成功",null);
     }
 }
