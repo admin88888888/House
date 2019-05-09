@@ -12,6 +12,8 @@ import com.ddhouse.house.utils.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 /**
@@ -72,11 +74,12 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
     }
 
     @Override
-    public int Login(String usernumber, String password) {
+    public int Login(String usernumber, String password ,HttpServletRequest request) {
         QueryWrapper<FUser> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("usernumber", usernumber);
         FUser fUser = userMapper.selectOne(queryWrapper);
 
+        HttpSession session = request.getSession();
         if(fUser == null){
             QueryWrapper<FUser> queryWrapper2=new QueryWrapper<>();
             queryWrapper2.eq("phone", usernumber);
@@ -98,7 +101,8 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
                         jedisUtil.delKey("fUserId"+fUser3.getId());
                         throw new RuntimeException("用户已在别处登录，若非本人操作，请及时修改密码，重新登录！");
                     }
-                    jedisUtil.setStr("fUserId"+fUser3.getId(),fUser3.getId()+"",3600*24*7);
+                    jedisUtil.setStr("fUserId"+fUser3.getId(),fUser3.getId()+"",3600*24);
+                    session.setAttribute("fUser",fUser3);
                     return fUser3.getId();
                 }
             } else{
@@ -109,7 +113,8 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
                     jedisUtil.delKey("fUserId"+fUser2.getId());
                     throw new RuntimeException("用户已在别处登录，若非本人操作，请及时修改密码，重新登录！");
                 }
-                jedisUtil.setStr("fUserId"+fUser2.getId(),fUser2.getId()+"",3600*24*7);
+                jedisUtil.setStr("fUserId"+fUser2.getId(),fUser2.getId()+"",3600*24);
+                session.setAttribute("fUser",fUser2);
                 return fUser2.getId();
             }
 
@@ -121,7 +126,8 @@ public class FUserServiceImpl extends ServiceImpl<FUserMapper, FUser> implements
                 jedisUtil.delKey("fUserId"+fUser.getId());
                 throw new RuntimeException("用户已在别处登录，若非本人操作，请及时修改密码，重新登录！");
             }
-            jedisUtil.setStr("fUserId"+fUser.getId(),fUser.getId()+"",3600*24*7);
+            jedisUtil.setStr("fUserId"+fUser.getId(),fUser.getId()+"",3600*24);
+            session.setAttribute("fUser",fUser);
             return fUser.getId();
         }
 
