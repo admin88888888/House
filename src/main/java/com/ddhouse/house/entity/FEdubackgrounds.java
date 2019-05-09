@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,14 +23,22 @@ public class FEdubackgrounds extends Model<FEdubackgrounds> {
 
     private static final long serialVersionUID = 1L;
 
-	@TableId(value="uid", type= IdType.AUTO)
+	@TableId(value="id", type= IdType.AUTO)
+	private Integer id;
 	private Integer uid;
-	private String diplomainfo;
 	private String school;
 	private Date entertime;
 	private Date cometime;
 	private String education;
 
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getUid() {
 		return uid;
@@ -37,14 +46,6 @@ public class FEdubackgrounds extends Model<FEdubackgrounds> {
 
 	public void setUid(Integer uid) {
 		this.uid = uid;
-	}
-
-	public String getDiplomainfo() {
-		return diplomainfo;
-	}
-
-	public void setDiplomainfo(String diplomainfo) {
-		this.diplomainfo = diplomainfo;
 	}
 
 	public String getSchool() {
@@ -81,7 +82,7 @@ public class FEdubackgrounds extends Model<FEdubackgrounds> {
 
 	@Override
 	protected Serializable pkVal() {
-		return this.uid;
+		return this.id;
 	}
 
 }
