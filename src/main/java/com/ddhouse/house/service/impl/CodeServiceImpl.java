@@ -29,10 +29,10 @@ public class CodeServiceImpl implements CodeService {
             int code= RandomUtil.createNum(6);
             //存储验证码到Redis  2个key
             //1个key 用于短信失效  三分钟
-            jedisUtil.setStr("myRegister:"+phone,code+"",1800);
+            jedisUtil.setStr("myRegister:"+phone,code+"",240);
 
             //1个key  1分钟只能发送一次
-            jedisUtil.setStr("mySMS:"+phone,"",600);
+            jedisUtil.setStr("mySMS:"+phone,"",60);
             return JsonUtils.createJsonBean(AliyunSmsUtil.sendSms(phone,code)? 1000 : 0,"短信验证码发送成功",null);
         }
     }
