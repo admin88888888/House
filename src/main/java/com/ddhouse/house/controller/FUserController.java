@@ -78,7 +78,7 @@ public class FUserController {
     @ApiOperation(value = "发送短信验证码",notes = "发送短信验证码")
     @PostMapping("/user/sendmsg.do")
     public JsonBean sendMsg(@RequestParam(value = "phone",required=false)String phone){
-        return codeService.sendMsg(phone);
+        return codeService.sendReMsg(phone);
     }
     //
     @ApiOperation(value = "校验短信验证码,并修改密码",notes = "校验短信验证码,并修改密码")
